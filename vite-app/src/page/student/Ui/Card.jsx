@@ -1,6 +1,5 @@
 // components/UI/Card.jsx
-import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const Card = ({ children, className = '', padding = 'p-4', ...props }) => (
   <div 
@@ -11,10 +10,10 @@ const Card = ({ children, className = '', padding = 'p-4', ...props }) => (
   </div>
 );
 
-Card.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  padding: PropTypes.string
-};
+// Card.propTypes = {
+//   children: PropTypes.node.isRequired,
+//   className: PropTypes.string,
+//   padding: PropTypes.string
+// };
 
 export default Card;

@@ -1,6 +1,6 @@
 // components/Navigation/Navbar.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { 
   IoNotifications, 
   IoSearch, 
@@ -311,45 +311,45 @@ const Navbar = ({
 };
 
 // PropTypes for type checking
-Navbar.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string
-  }),
-  brandName: PropTypes.string,
-  notificationCount: PropTypes.number,
-  onNotificationClick: PropTypes.func,
-  onSearch: PropTypes.func
-};
+// Navbar.propTypes = {
+//   user: PropTypes.shape({
+//     name: PropTypes.string,
+//     email: PropTypes.string
+//   }),
+//   brandName: PropTypes.string,
+//   notificationCount: PropTypes.number,
+//   onNotificationClick: PropTypes.func,
+//   onSearch: PropTypes.func
+// };
 
-NotificationBadge.propTypes = {
-  count: PropTypes.number,
-  onClick: PropTypes.func
-};
+// NotificationBadge.propTypes = {
+//   count: PropTypes.number,
+//   onClick: PropTypes.func
+// };
 
-SearchBar.propTypes = {
-  isExpanded: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired,
-  onSearch: PropTypes.func.isRequired
-};
+// SearchBar.propTypes = {
+//   isExpanded: PropTypes.bool.isRequired,
+//   onToggle: PropTypes.func.isRequired,
+//   onSearch: PropTypes.func.isRequired
+// };
 
-UserProfileDropdown.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string
-  }),
-  isOpen: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired
-};
+// UserProfileDropdown.propTypes = {
+//   user: PropTypes.shape({
+//     name: PropTypes.string,
+//     email: PropTypes.string
+//   }),
+//   isOpen: PropTypes.bool.isRequired,
+//   onToggle: PropTypes.func.isRequired,
+//   onClose: PropTypes.func.isRequired
+// };
 
-MobileMenu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  user: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string
-  })
-};
+// MobileMenu.propTypes = {
+//   isOpen: PropTypes.bool.isRequired,
+//   onClose: PropTypes.func.isRequired,
+//   user: PropTypes.shape({
+//     name: PropTypes.string,
+//     email: PropTypes.string
+//   })
+// };
 
 export default Navbar;

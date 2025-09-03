@@ -1,6 +1,6 @@
 // components/UI/Button.jsx
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const Button = ({ 
   children, 
@@ -42,13 +42,13 @@ const Button = ({
   );
 };
 
-Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'success']),
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  className: PropTypes.string
-};
+// Button.propTypes = {
+//   children: PropTypes.node.isRequired,
+//   variant: PropTypes.oneOf(['primary', 'secondary', 'success']),
+//   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+//   onClick: PropTypes.func,
+//   disabled: PropTypes.bool,
+//   className: PropTypes.string
+// };
 
 export default Button;

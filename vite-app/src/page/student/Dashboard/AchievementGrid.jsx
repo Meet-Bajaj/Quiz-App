@@ -1,6 +1,6 @@
 // components/Dashboard/AchievementGrid.jsx
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const AchievementItem = memo(({ icon, title, bgColor, description }) => (
   <div className="text-center group cursor-pointer">
@@ -24,15 +24,15 @@ const AchievementGrid = ({ achievements = [] }) => (
   </div>
 );
 
-AchievementItem.propTypes = {
-  icon: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  bgColor: PropTypes.string.isRequired,
-  description: PropTypes.string
-};
+// AchievementItem.propTypes = {
+//   icon: PropTypes.string.isRequired,
+//   title: PropTypes.string.isRequired,
+//   bgColor: PropTypes.string.isRequired,
+//   description: PropTypes.string
+// };
 
-AchievementGrid.propTypes = {
-  achievements: PropTypes.arrayOf(PropTypes.object)
-};
+// AchievementGrid.propTypes = {
+//   achievements: PropTypes.arrayOf(PropTypes.object)
+// };
 
 export default AchievementGrid;

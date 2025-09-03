@@ -1,6 +1,6 @@
 // components/UI/ErrorBoundary.jsx
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Button from './Button';
 
 const ErrorDisplay = ({ error, onRetry }) => (
@@ -16,9 +16,9 @@ const ErrorDisplay = ({ error, onRetry }) => (
   </div>
 );
 
-ErrorDisplay.propTypes = {
-  error: PropTypes.string.isRequired,
-  onRetry: PropTypes.func
-};
+// ErrorDisplay.propTypes = {
+//   error: PropTypes.string.isRequired,
+//   onRetry: PropTypes.func
+// };
 
 export default ErrorDisplay;
