@@ -3,7 +3,7 @@ import Login from "./page/auth/Login";
 import Signup from "./page/auth/Signup";
 import Dashboard from "./page/student/Dashboard/Dashboard";
 
-import {HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
+import {HashRouter, Routes, Route } from "react-router-dom";
 import QuizPage from "./page/student/QuizPage";
 function App() {
   return (
