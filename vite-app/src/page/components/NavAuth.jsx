@@ -8,18 +8,18 @@ const Navbar = ({ isRequired = true }) => {
 
   return (
     <nav
-      className="w-full text-white flex justify-between items-center px-6 sm:px-12 py-4 sm:py-6 fixed top-0 left-0 z-50"
+      className="fixed top-4 md:top-10 left-1/2 z-50 w-9/10 max-w-4xl opacity-80 border-white/10 border-2 bg-black/20 backdrop-blur-lg text-white flex justify-between items-center px-6 sm:px-12 py-4 sm:py-4 
+      rounded-full shadow-lg transform -translate-x-1/2"
       role="navigation"
       aria-label="Main navigation"
     >
       <button
         onClick={handleLogoClick}
-        className="p-2 text-xl sm:text-2xl font-bold cursor-pointer hover:text-gray-200 transition-colors focus:outline-none rounded"
+        className=" text-xl bricolage sm:text-2xl font-bold cursor-pointer hover:text-gray-200 transition-colors focus:outline-none rounded"
         aria-label="Navigate to home page"
       >
         Quizzy
       </button>
-
       <div className="flex items-center space-x-2 sm:space-x-4">
         {isRequired && <Button onClick={handleLogin} />}
       </div>
@@ -31,8 +31,8 @@ const Button = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="py-2 px-4 sm:px-8 border-2 border-white text-white rounded-full font-medium text-sm sm:text-base
-       hover:bg-white hover:text-black transition-all duration-200 transform hover:scale-105 active:scale-95"
+      className="py-2 px-4 sm:px-8 border-2 border-white text-black bg-white rounded-full font-medium text-sm sm:text-base 
+      hover:bg-transparent hover:text-white transition-all duration-200 transform hover:scale-105 active:scale-95 focus:outline-none"
       aria-label="Login to your account"
     >
       Login
