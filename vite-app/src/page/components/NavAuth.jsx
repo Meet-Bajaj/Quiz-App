@@ -8,7 +8,7 @@ const Navbar = ({ isRequired = true }) => {
 
   return (
     <nav
-      className="fixed top-4 md:top-10 left-1/2 z-50 w-9/10 max-w-4xl opacity-80 border-white/10 border-2 bg-black/20 backdrop-blur-lg text-white flex justify-between items-center px-6 sm:px-12 py-4 sm:py-4 
+      className="fixed top-4 md:top-10 left-1/2 z-50 w-9/10  max-w-6xl opacity-80 border-white/10 border-2 bg-black/20 backdrop-blur-lg text-white flex justify-between items-center px-6 sm:px-12 py-4 sm:py-4 
       rounded-full shadow-lg transform -translate-x-1/2"
       role="navigation"
       aria-label="Main navigation"

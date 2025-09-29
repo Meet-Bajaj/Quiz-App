@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import Prism from "../components/Prism";
 import Footer from "../components/Footer";
 import Navbar from "../components/NavAuth";
 
 const Signup = React.memo(() => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -32,6 +32,7 @@ const Signup = React.memo(() => {
     } finally {
       setIsLoading(false);
     }
+    navigate("/signup/select-role");
   };
   const attributes = {
     animationType: "rotate",

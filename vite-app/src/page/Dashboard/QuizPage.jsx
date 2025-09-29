@@ -99,7 +99,7 @@ const QuizPage = ({ User, Quiz }) => {
     <div className="min-h-screen w-full bg-black text-white flex flex-col">
       <Navbar />
 
-      <main className="flex flex-grow px-4 py-6 gap-4 roboto flex-col-reverse md:flex-row">
+      <main className="flex flex-grow px-4 py-6 gap-4 roboto flex-col md:flex-row">
         {/* Left: Quiz Section */}
         <section className="w-full md:w-3/4 bg-zinc-800 p-6 rounded-lg shadow-lg flex flex-col">
           {/* Tabs */}

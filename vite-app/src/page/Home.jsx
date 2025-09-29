@@ -22,7 +22,7 @@ function Home() {
     <>
       <div className="h-screen w-screen relative flex  flex-col justify-center items-center gap-16 p-10">
         <Navbar />
-        <div className="w-full h-full absolute -z-10 md:flex hidden">
+        <div className="w-full h-full absolute -z-10 sm:flex hidden">
           <Prism {...attributes} />
         </div>
 
