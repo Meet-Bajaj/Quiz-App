@@ -13,7 +13,6 @@ export default function Settings() {
     autoPublishResults: true,
     allowLateSubmissions: false,
     showCorrectAnswers: true,
-    emailNotifications: true,
   });
 
   const [errors, setErrors] = useState({});
@@ -193,11 +192,6 @@ export default function Settings() {
                 key: "showCorrectAnswers",
                 label: "Show Correct Answers",
                 description: "Display correct answers after quiz completion",
-              },
-              {
-                key: "emailNotifications",
-                label: "Email Notifications",
-                description: "Receive email notifications for quiz events",
               },
             ].map(({ key, label, description }) => (
               <label

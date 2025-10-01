@@ -14,6 +14,7 @@ import {
   FiActivity,
   FiCheckCircle,
 } from "react-icons/fi";
+import QuizList from "./QuizList";
 
 // ... rest of the Dashboard.jsx code remains the same ...
 const formatDate = (dateString) => {
@@ -132,11 +133,11 @@ function Dashboard({ data }) {
               <div className="flex items-center gap-3">
                 <div className="w-24 h-2 bg-gray-800 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-500"
+                    className="h-full bg-white rounded-full transition-all duration-500"
                     style={{ width: `${quiz.avgScore}%` }}
                   ></div>
                 </div>
-                <span className="text-blue-400 text-sm font-semibold w-10 text-right">
+                <span className="text-white text-sm font-semibold w-10 text-right">
                   {quiz.avgScore}%
                 </span>
               </div>
@@ -144,7 +145,7 @@ function Dashboard({ data }) {
           ))}
         </ListCard>
 
-        <ListCard title="Notifications" icon={FiActivity}>
+        {/* <ListCard title="Notifications" icon={FiActivity}>
           {data.notifications.length > 0 ? (
             data.notifications.map((notification) => (
               <div
@@ -168,7 +169,7 @@ function Dashboard({ data }) {
               No new notifications
             </p>
           )}
-        </ListCard>
+        </ListCard> */}
       </div>
     </div>
   );
@@ -232,15 +233,7 @@ export default function Host() {
       case "settings":
         return <Settings />;
       case "list":
-        return (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <FiList className="text-6xl text-gray-600 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-white mb-2">Quiz List</h2>
-              <p className="text-gray-400">View all your created quizzes</p>
-            </div>
-          </div>
-        );
+        return <QuizList />;
       case "logout":
         return (
           <div className="flex items-center justify-center h-full">
