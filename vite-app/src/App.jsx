@@ -8,7 +8,7 @@ import Signup from "./page/auth/Signup";
 import SelectRole from "./page/auth/SelectRole";
 // import Host from "./page/Dashboard/host/dashboard";
 import Host from "./page/Dashboard/host/Dashboard";
-// import Participant from "./page/Dashboard/participant/Dashboard";
+import Participant from "./page/Dashboard/participant/Dashboard";
 import QuizPage from "./page/Dashboard/QuizPage";
 
 function App() {
@@ -22,8 +22,7 @@ function App() {
           <Route path="/signup/select-role" element={<SelectRole/>} />
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           <Route path="/dashboard/host" element={<Host/>} />
-          {/* <Route path="/dashboard/quiz" element={<QuizPage/>} /> */}
-          {/* <Route path="/dashboard/participant" element={<Participant/>} /> */}
+          <Route path="/dashboard/participant" element={<Participant/>} />
           <Route
             path="/quiz"
             element={
