@@ -24,6 +24,7 @@ exports.createQuiz = async (req, res) => {
     description,
     questions,
     maxParticipants,
+    durationMinutes,
     host: req.session.userId,
     joinCode
   });
@@ -79,10 +80,11 @@ exports.startQuiz = async (req, res) => {
   quiz.status = 'live';
   // set startAt if not set
   if (!quiz.startAt) quiz.startAt = new Date();
-  // if duration provided in body, set endAt
-  if (req.body.durationMinutes) {
-    quiz.endAt = new Date(new Date(quiz.startAt).getTime() + req.body.durationMinutes * 60000);
-  }
+  
+  // Calculate endAt: use durationMinutes from body, or quiz.durationMinutes, or default to 60 minutes
+  const durationMinutes = req.body.durationMinutes || quiz.durationMinutes || 60;
+  quiz.endAt = new Date(new Date(quiz.startAt).getTime() + durationMinutes * 60000);
+  
   await quiz.save();
   res.json({ quiz });
 };
@@ -121,4 +123,86 @@ exports.scheduleQuiz = async (req, res) => {
   quiz.status = 'draft';
   await quiz.save();
   res.json({ quiz });
+};
+
+// delete quiz
+exports.deleteQuiz = async (req, res) => {
+  try {
+    const quiz = await Quiz.findOne({ _id: req.params.id, host: req.session.userId });
+    if (!quiz) return res.status(404).json({ error: 'Quiz not found' });
+
+    // Delete all attempts for this quiz
+    await Attempt.deleteMany({ quiz: quiz._id });
+    
+    // Delete the quiz
+    await Quiz.deleteOne({ _id: quiz._id });
+    
+    res.json({ success: true, message: 'Quiz deleted successfully' });
+  } catch (err) {
+    console.error("Delete quiz error:", err);
+    res.status(500).json({ error: 'Server error while deleting quiz' });
+  }
+};
+
+
+exports.updateQuestion = async (req, res) => {
+  try {
+    const quizId = req.params.id;
+    const index = parseInt(req.params.qIndex);
+
+    const { text, options, correctIndex, marks } = req.body;
+
+    const quiz = await Quiz.findById(quizId);
+    if (!quiz) return res.status(404).json({ error: "Quiz not found" });
+
+    if (!quiz.questions[index]) {
+      return res.status(400).json({ error: "Invalid question index" });
+    }
+
+    quiz.questions[index] = {
+      text,
+      options,
+      correctIndex,
+      marks
+    };
+
+    await quiz.save();
+
+    res.json({
+      message: "Question updated",
+      questions: quiz.questions
+    });
+
+  } catch(err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// ⭐ DELETE SINGLE QUESTION BY INDEX
+exports.deleteQuestion = async (req, res) => {
+  try {
+    const quizId = req.params.id;
+    const index = parseInt(req.params.qIndex, 10);
+
+    const quiz = await Quiz.findById(quizId);
+    if (!quiz) return res.status(404).json({ error: "Quiz not found" });
+
+    if (!Array.isArray(quiz.questions) || index < 0 || index >= quiz.questions.length) {
+      return res.status(400).json({ error: "Invalid question index" });
+    }
+
+    // Remove question from array
+    quiz.questions.splice(index, 1);
+
+    await quiz.save();
+
+    return res.json({
+      message: "Question deleted",
+      questions: quiz.questions,
+    });
+  } catch (err) {
+    console.error("deleteQuestion error:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
 };

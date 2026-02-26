@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema(
     verified: { type: Boolean, default: false },
 
     verificationToken: { type: String, default: null },
+
+    // Profile fields (optional)
+    rollNo: { type: String, default: "" },
+    organization: { type: String, default: "" },
+    program: { type: String, default: "" },
+    semester: { type: String, default: "" },
   },
   { timestamps: true }
 );

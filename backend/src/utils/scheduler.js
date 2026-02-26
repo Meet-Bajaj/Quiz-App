@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const Quiz = require('../models/quiz');
+const Quiz = require('../models/Quiz');
 const Attempt = require('../models/Attempt');
 
 function evaluateAttempt(quiz, attempt) {

@@ -14,7 +14,7 @@ backend/.env
 client/.env
 client/build/
 client/.cache/
-
+vite-app
 # Logs
 *.log
 logs/

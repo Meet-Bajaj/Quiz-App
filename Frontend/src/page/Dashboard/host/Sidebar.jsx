@@ -14,7 +14,6 @@ export default function Sidebar({ onNavigate, activePage }) {
     { key: "list", label: "Quiz List", icon: FiList },
     { key: "results", label: "Results", icon: FiBarChart2 },
     { key: "settings", label: "Settings", icon: FiSettings },
-    { key: "logout", label: "Logout", icon: FiLogOut },
   ];
 
   return (

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
   FiAward,
   FiCalendar,
@@ -10,7 +9,7 @@ import {
   FiBook,
 } from "react-icons/fi";
 import { getDifficultyColor, getScoreColor, getRankSuffix } from "./Helper";
-import mockParticipantData from "./mockdata";
+import mockParticipantData from "./mockdata";0
 
 import JoinQuiz from "./Joinquiz";
 import MyResults from "./MyResult";
@@ -20,7 +19,7 @@ import StatCard from "./StatsCard";
 import formatDate from "./FromateDate";
 import ParticipantSidebar from "./Sidebar";
 
-function ParticipantDashboard({ data, userData }) {
+function ParticipantDashboard({ data }) {
   const stats = useMemo(() => data.stats, [data.stats]);
   const recentQuizzes = useMemo(
     () => data.attemptedQuizzes.slice(0, 3),
@@ -31,16 +30,11 @@ function ParticipantDashboard({ data, userData }) {
     <div className="p-8 flex-1 overflow-y-auto">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-white mb-2">
-          Welcome back, {userData?.user?.name || data.profile.name}! 👋
+          Welcome back, {data.profile.name}! 👋
         </h2>
         <p className="text-gray-400">
           Here's your learning progress and upcoming activities
         </p>
-        {userData?.user?.organizationName && (
-          <p className="text-gray-500 text-sm mt-1">
-            {userData.user.organizationName} • {userData.user.program || "Student"}
-          </p>
-        )}
       </div>
 
       {/* Quick Stats */}
@@ -218,74 +212,24 @@ function ParticipantDashboard({ data, userData }) {
     </div>
   );
 }
+/* *************************************************************************************************** */
+/* *************************************************************************************************** */
 
+// Main Participant Component
 export default function Participant() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
   const [data, setData] = useState(mockParticipantData);
   const [activePage, setActivePage] = useState("dashboard");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Get user data from navigation state or session
-    const stateUserData = location.state?.userData;
-    
-    if (stateUserData) {
-      setUserData(stateUserData);
+    // Simulate API call
+    setLoading(true);
+    const timer = setTimeout(() => {
       setLoading(false);
-    } else {
-      // If no state, check session
-      const sessionId = localStorage.getItem("sessionId");
-      if (sessionId) {
-        fetchUserData(sessionId);
-      } else {
-        navigate("/login");
-      }
-    }
-  }, [location, navigate]);
+    }, 1000);
 
-  const fetchUserData = async (sessionId) => {
-    try {
-      const response = await fetch('http://localhost:5000/api/auth/check-session', {
-        headers: {
-          'X-Session-ID': sessionId
-        }
-      });
-      const data = await response.json();
-      if (data.valid) {
-        setUserData({
-          sessionId: sessionId,
-          user: data.user
-        });
-      } else {
-        navigate("/login");
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      navigate("/login");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleLogout = () => {
-    const sessionId = localStorage.getItem("sessionId");
-    if (sessionId) {
-      // Call logout API
-      fetch('http://localhost:5000/api/auth/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ sessionId })
-      });
-      
-      // Clear local storage
-      localStorage.removeItem("sessionId");
-    }
-    navigate("/login");
-  };
+    return () => clearTimeout(timer);
+  }, []);
 
   const renderPage = () => {
     if (loading) {
@@ -301,15 +245,15 @@ export default function Participant() {
 
     switch (activePage) {
       case "dashboard":
-        return <ParticipantDashboard data={data} userData={userData} />;
+        return <ParticipantDashboard data={data} />;
       case "join":
-        return <JoinQuiz data={data} userData={userData} />;
+        return <JoinQuiz data={data} />;
       case "results":
-        return <MyResults data={data} userData={userData} />;
+        return <MyResults data={data} />;
       case "upcoming":
-        return <UpcomingQuizzes data={data} userData={userData} />;
+        return <UpcomingQuizzes data={data} />;
       case "settings":
-        return <ProfileSettings data={data} userData={userData} />;
+        return <ProfileSettings data={data} />;
       case "logout":
         return (
           <div className="flex items-center justify-center h-full">
@@ -317,23 +261,20 @@ export default function Participant() {
               <FiLogOut className="text-6xl text-gray-600 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-white mb-2">Logout</h2>
               <p className="text-gray-400">Are you sure you want to logout?</p>
-              <button 
-                className="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors" 
-                onClick={handleLogout}
-              >
+              <button className="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors" onClick={() => alert("Logged out!")}>
                 Confirm Logout
               </button>
             </div>
           </div>
         );
       default:
-        return <ParticipantDashboard data={data} userData={userData} />;
+        return <ParticipantDashboard data={data} />;
     }
   };
 
   return (
     <div className="min-h-screen flex bg-black">
-      <ParticipantSidebar onNavigate={setActivePage} activePage={activePage} userData={userData} />
+      <ParticipantSidebar onNavigate={setActivePage} activePage={activePage} />
       <main className="flex-1 bg-gradient-to-br from-black via-gray-950 to-black overflow-hidden">
         {renderPage()}
       </main>

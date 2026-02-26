@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 import Results from "./Result";
 import Settings from "./Settings"; // ADD THIS IMPORT
 import mockdata from "./mockdata";
-const mockData = mockdata;
+// const mockData = mockdata;
 import {
   FiList,
   FiBarChart2,

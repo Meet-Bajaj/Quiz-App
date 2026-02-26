@@ -16,6 +16,7 @@ const QuizSchema = new mongoose.Schema({
 
   questions: [QuestionSchema],
   maxParticipants: { type: Number, default: 0 },
+  durationMinutes: { type: Number },
   status: { type: String, enum: ['draft', 'live', 'finished'], default: 'draft' },
   createdAt: { type: Date, default: Date.now },
   startAt: { type: Date },
