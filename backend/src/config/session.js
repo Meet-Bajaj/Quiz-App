@@ -1,8 +1,9 @@
+
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 module.exports = session({
-  secret: process.env.SESSION_SECRET || "secret-key",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
 
@@ -10,15 +11,15 @@ module.exports = session({
     mongoUrl: process.env.MONGO_URI,
     dbName: "projectSessions",
     collectionName: "sessions",
-    ttl: 60 * 60 * 24, // 1 day
+    ttl: 60 * 60 * 24,
     autoRemove: "native",
   }),
 
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: false,      
-    sameSite: "lax",    
-    path: "/",          
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    path: "/",
   },
 });
