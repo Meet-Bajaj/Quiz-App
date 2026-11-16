@@ -14,20 +14,20 @@ const ProtectedRoute = ({ children }) => {
     const checkSession = async () => {
       console.log("🔍 ProtectedRoute: Starting session check...");
       
-      // FALLBACK TIMEOUT - Always trigger after 6 seconds no matter what
+      // FALLBACK TIMEOUT - Always trigger after 15 seconds no matter what
       fallbackTimeoutId = setTimeout(() => {
         console.error("⏰ ProtectedRoute: Fallback timeout triggered - forcing redirect");
         if (isMounted) {
           setLoading(false);
           setAuthenticated(false);
         }
-      }, 6000); // 6 second absolute maximum
+      }, 15000); // 15 second absolute maximum (Vercel cold starts)
 
       try {
-        // Make the API call with a shorter timeout
+        // Make the API call with a generous timeout for cold starts
         const res = await API.get("/auth/me", { 
           withCredentials: true,
-          timeout: 4000 // 4 second axios timeout
+          timeout: 12000 // 12 second axios timeout
         });
 
         // Clear fallback timeout if request succeeded

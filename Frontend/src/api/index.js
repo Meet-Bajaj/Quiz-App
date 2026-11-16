@@ -9,7 +9,7 @@ const API = axios.create({
   // Use the environment variable for the base URL
   baseURL: `${baseURL}/api`,
   withCredentials: true,
-  timeout: 5000, // 5 second timeout to prevent hanging
+  timeout: 20000, // 20 seconds - Vercel cold starts can exceed 5s
   headers: {
     "Content-Type": "application/json",
   },

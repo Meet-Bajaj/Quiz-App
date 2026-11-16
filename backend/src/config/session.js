@@ -2,8 +2,20 @@
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
+const isProduction = process.env.NODE_ENV === "production";
+const secret = process.env.SESSION_SECRET;
+
+if (!secret) {
+  if (isProduction) {
+    throw new Error(
+      "SESSION_SECRET is required in production. Set it in your Vercel project environment variables."
+    );
+  }
+  console.warn("SESSION_SECRET not set - using development-only secret.");
+}
+
 module.exports = session({
-  secret: process.env.SESSION_SECRET,
+  secret: secret || "development-only-secret",
   resave: false,
   saveUninitialized: false,
 
@@ -18,8 +30,8 @@ module.exports = session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
     path: "/",
   },
 });

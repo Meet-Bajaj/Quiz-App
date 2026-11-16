@@ -1,22 +1,18 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
+
 const app = require("./app");
+const connectDB = require("./config/db");
 
 const PORT = process.env.PORT || 4000;
 
-// --------- MONGO CONNECTION ----------
-mongoose
-  .connect(process.env.MONGO_URI)
+connectDB()
   .then(() => {
-    console.log("🟢 MongoDB connected");
-
     app.listen(PORT, () => {
-      console.log(`🟢 Server running on port ${PORT}`);
-      console.log(`🟢 Frontend allowed: ${process.env.CLIENT_URL}`);
-      console.log("✔ System Ready: DB + CORS + Sessions + Routes");
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Frontend allowed: ${process.env.CLIENT_URL}`);
     });
   })
   .catch((err) => {
-    console.error("🔴 MongoDB Connection Failed");
-    console.error(err);
+    console.error("Failed to start server:", err.message);
+    process.exit(1);
   });
